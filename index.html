@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+            body {
+                font-family: Poppins;
+                line-height: 1.8em;
+                font-size: 16px;
+                padding: 40px;
+            }
+            h2 {
+                margin: 0;
+                font-size: 1.33em;
+                color: #0e387a;
+                line-height: 1.66em;
+            }
+            p {
+                margin: 0 0 1.8em;
+            }
+            .warningOverlay {
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: rgba(0, 0, 0, 0.75);
+            }
+            .warningPopup {
+                background: #fff;
+                border-radius: 1em;
+                padding: 1em 1.33em;
+                box-sizing: border-box;
+                width: 600px;
+                margin-left: -300px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+            }
+            .warningPopup .close {
+                position: absolute;
+                right: -20px;
+                top: -20px;
+                width: 40px;
+                height: 40px;
+                background: #0e387a;
+                border-radius: 50%;
+                font-size: 1.33em;
+                color: #fff;
+                font-weight: 900;
+                text-align: center;
+                line-height: 39px;
+                cursor: pointer;
+            }
+            @media screen and (max-width: 700px) {
+                .warningPopup {
+                    width: 520px;
+                    margin-left: -260px;
+                }
+            }
+            @media screen and (max-width: 600px) {
+                .warningPopup {
+                    width: 90%;
+                    top: 50%;
+                    left: 5%;
+                    right: 0;
+                    margin: 0;
+                    border-radius: 0;
+                    padding-right: 60px;
+                }
+                .warningPopup .close {
+                    right: 0;
+                    top: 0;
+                    border-radius: 0;
+                }
+            }
+            .open {
+                background: #454545;
+                color: #fff;
+                padding: 3px 10px 5px;
+                width: auto;
+                display: inline-block;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="content">
+            <p class="open">Open popup</p>
+
+            <div class="warningOverlay">
+                <div class="warningPopup">
+                    <span class="close">X</span>
+                    <h2>Successfully Posted</h2>
+                </div>
+            </div>
+        </div>
+
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            var popUp = $(".warningPopup");
+            function popupCenter() {
+                var popUpHeight = popUp.outerHeight(true);
+                popUpHeight = popUpHeight / 2;
+                popUpHeight = "-" + popUpHeight + "px";
+
+                if ($(document).width() > 600) {
+                    popUp.css("margin-top", popUpHeight);
+                } else {
+                    popUp.css("margin-top", "0");
+                }
+            }
+
+            // run center function on page resize
+            $(window).resize(function () {
+                popupCenter();
+            });
+
+            // close popup screen
+            $(".close").on("click", function () {
+                $(this).parent().parent().hide();
+            });
+
+            // open popup screen
+            $(".open").on("click", function () {
+                $(".warningOverlay").show();
+            });
+        </script>
+    </body>
+</html>
